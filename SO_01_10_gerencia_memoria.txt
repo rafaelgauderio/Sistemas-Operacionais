@@ -1,0 +1,75 @@
+Gerência de memória
+
+Memória Lógica -> Processo enxerga
+Memória Física -> Implementada pelos circuitos integrados da memória
+Espaço de endereçamento lógico
+	-> Todos os endereços lógicos que um processo pode gerar
+Espaço de endereçamento Físico
+	->Todos os endereços aceitos pela memória física
+MMU (memory managemet unit) (Slide 2)
+	->Componente do hardware responsável por auxilior o SO com a gerência de memória
+	Ex: Registradores de Limite (Slide 3)
+	Ex: Base + Limite (slide 4)
+->Relocação: carregador relocar x absoluto
+->Partições Fixas: Divide memória em diversos tamanhos fixos (slide 5)
+Problemas: 1) Fragmentação interna (memória perdida dentro da área alocada para processo)
+	   2) Fragmentação externa (memória perdida fora da área ocupada por processos)
+
+->Partições variáveis (slide 6)
+	-> Tamanho das partições ajustado dinamicamente
+	-> SO mantém lista de lacunas
+	-> Novo processo usa uma área (lacuna) onde ele caixa
+	-> Algoritmo: First-Fit, Best-Fit, circular-fit
+	-> Quando o processo finaliza, lacuna é criada, e unificada com lacunas adjacentes
+	-> Em ves de byte a byte, memoria pode ser alocada em parágrafos (ex: 32 Bytes)
+	-> Reduzida fragmentação interna, grave fragmentação externa (até 1/3 da memória)
+	-> Compactação de memória pode resolver problema, mas é muito caro, e não muito usado
+
+->SWAPPING
+	-> Às vezes, pode não haver memória disponível para todos os processos ao mesmo tempo
+	-> Um processo pode ser completamente copiado para o disco, e suspenso temporariamente
+	-> Swap-out: Processo é removido da fila do processador, e colocado em mode suspenso no disco
+	-> Swap-in: Copiado novamente para a memória
+	-> Vantagem: SO consegue executar mais processos do que caberia na mória
+	-> Procedimento muito demorado, vale a pena apens se processo ficar vários segundos no disco
+
+->Paginação (slide 7)
+	-> Fragmentação externa; Probla porque processos ocupam área contínuas de memória
+	-> Paginação elimina restrição, acaba com fragmentação externa
+	-> Espaço de endereçamento lógico é divido em páginas lógicas de tamanho fixo
+	-> Endereço lógico dividio em 2 partes: N.º de página lógica e descolamento
+	-> Memória física é dividida em páginas físicas com tamanho fixo
+	-> Programa carregado página a página
+	-> Qualquer página lógica pode ocupar qualquer página física
+	-> Tabela de páginas é criada informando correspondência entre página lógica e física
+	-> A cada acesso, endereço lógico é transformado em endereço físico com auxílio da tabela de páginas
+	-> Tamanhos típico: 1 KB a 8K
+	-> Ex: Página = 4 kB, processo=201 KB, usa 51 páginas, frag. iterna = 3KB
+	-> Como a tabela de página é implementada?
+		-> Pequena? Registradores de acesso rápido
+		-> Muito grande? na prórpia memória - MMU possui 2 Registradores: PTBR, PTLR
+					Contra: cada acesso a memória vira 2 acessos
+		-> TLB: cache em MMU, HIT/MISS (memória associativa: pesquisa paralela)
+			->TLB de 16 a 32 entradas: 80% a 90% de acerto
+			->TLB deve ser esvaziada a cada troca de processo
+	-> Tabela de páginas possui bits auxiliares
+		->válido/inválido -> interrupção de proteção (erro de página)
+		->uso da página: RO, XO, RW
+	-> Sistemas Atuais: Tabela de páginas pode ser muito grande    
+		Ex: 386-> até 4 M
+		-> Solução: tabela de páginas em 2 níveis
+		(diretório das tabelas de páginas)
+	
+	end. lógico = 32 Bits
+	10 bits: n.º da entrada no diretório
+	10 bits: n.º da página na tabela indicada
+	12 Bits: Deslocamento dentro da página
+			
+			
+	
+
+
+	
+	
+	
+		
