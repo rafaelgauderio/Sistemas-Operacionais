@@ -1,0 +1,26 @@
+2013 - Prova 01
+
+12
+a - FIFO
+olhar Carga - 3 - menor carga
+
+b - LRU
+olhar ultima referencia - 180 - faz mais tempo que não usa
+
+c- Segunda chance cirgular - 2
+Vai zerando tudo que estiver em um
+Pega o primeiro que tiver zero
+Se estiver tudo em 1, pega o primeiro da lista porque vai estar zerado após a primeira passagem pela lista
+
+
+13 -
+A)
+
+ 		1 A 2 B 3 A 4 A 3 B 1 C B 3
+pagina. 0	1 1 1 1 3 3 3 3 3 3 3 C C C
+pagina. 1         A A A A 4 4 4 4 4 4 4 B B 
+pagina. 2	    2 2 2 2 A A	A A A A	A 3
+pagina. 3 	      B	B B B B	B B 1 1 1 1
+
+11 ACESSOS 
+

@@ -1,0 +1,102 @@
+->SEGMENTAÇÃO (slide 9)
+	-> Programadores e compiladores enxergam memória não em página, mas em segmentos
+	-> Ex:. 4 segmentos código, dados alocados dinamicamente, pilha em execução
+	-> Gerência de Memória pode suportar segmentos
+	-> Memória Lógica para indicar n.º de segmentos e deslocamento detro do segmento
+	-> Cada segmento é copiado para memória, e tabela de segmentos é constrídda (com base e limite)
+	-> Interrupção de proteção é gerada se segento não existe, ou deslocamento é maior que limete
+	-> Fragmentação interna é elimianda, mas externa pode ser problema
+	-> Vantagem: compartilhamento de memória Ex: código segmentos tendem a ser homogêneos código de biblitecas é compartilhado
+
+-> Segmentação paginada (slide 10)
+	-> Espaço código é formado por segmentos, e cada segmento é dividido em página lógicas
+	-> Cada segmento possui tabela de páginas associada
+	-> Elimina fragmentação externa da segmentação
+
+->MEMÓRIA VIRTUAL
+	-> Técnicas anteriores carregam todo o programa para memória para ser executado
+	-> Mas nem todas as partes de um programa são necessárias ao mesmo tempo
+	-> Memória virtual permite que processo execute, com apenas o que é realmente necessário
+	-> Espaço liberado permite execução simultanea de mais programas
+	-> S.O. cria a ilusão que cada processo possui espaço de endereçamento contíguo em memória, sem restrição de tamanho
+	-> Processo pode inclusive usar mais memória do que quantidade de memória física instalada
+	-> Memória virtual expande memória física adicionando espaço em disco (área de swap)
+	-> Ex:. windows: arquivo
+		Linux: Partição
+		x86: 4 GB de espaço de endereçamento
+
+	-> Ideia básica: Acesso feitos à memória que está na RAM são diretos, à memória em disco precisam antes se carregados para Ram
+	-> Implementação da memória virtual usa mecanismos estudados: paginação, segmentação, segmentação paginada
+	-> Página (ou segmentos) são copiadas entre disco e RAM
+	-> MMU (unidade de gerenciamento de memória) precisa dar suporte a memória virtual
+	-> Mais usado: Memória Virtual sobre paginação
+	-> Princípio da Localidade de referência: Programa tende a se concentrar em certas regiões do seu código
+		-> Localidade temporal
+		-> Localidade espacial
+	-> Paginação sod demanda (slide 11)
+		-> Apenas páginas efetivamente acessadas pelo processo são carregadas para memória física
+		-> BIT válido/inválido da taela de páginas indica quais páginas lógicas foram carregadas
+		-> BIT inlálido: MMU gera interrepção de proteção e aciona S.O.
+			-> S.O. Determina se endereço pertence ao processo, e se ocorreu fage fault
+
+	-> Ações quando paga FAULT: 
+		-> Processo é suspenso e entra na fila dos processos esperando página lógica
+		-> Página física Livre deve ser alocada
+		-> Página lógica acessada é localizada no disco
+		-> Operação de leitura do disco é solicitada
+		-> Outros Processos podem ser escalonados
+		-> Tabela de página é corrigida para indicar página agora como válida
+		-> Processo reinserido na fila dos aptos
+
+	-> Substituição de Páginas na memória
+		-> Página vítima (a que sai da memória)
+		-> Algoritmo escolhe a página vítima	
+		-> BITS auxiliares
+			-> Dirty BIT: Página foi alterada? Não precisa reescrever no disco
+			-> Reference bit: página foi acessada?
+						-> Zerado pelo S.O. periodicamente
+		-> Lock BIT: diz que a página não pode ser substituída
+			-> Ex: Esperando por E/S, poderia destruir nova página
+			-> Ex: Indicação de páginas muito usadas
+	-> Algoritmos de substituição de páginas
+		-> Classe Global x Classe Local
+		-> Algoritmo ótimo: escolhe página lógica que não será mais utilizada ou que será utilizada no futuro mais distante
+		-> Impossível solução: tentar prever o futuro com base no passado
+		-> String de referência indica sequência de acessos à memória. Ex: 22234155
+		-> Algoritmos Globais
+			-> Podem escolher qualquer página da memória para ser substituída
+			-> FIFO: Retira página há mais tempo na memória
+			-> LEAST RECENTRY USED (LRU): Vítima é a página não acessada há mais tempo
+				-> Na prática é muito custoso
+				-> Aproximação: Amostragem periódica dos referecen BITS
+					-> Vítima: menor valor de histórico
+			-> Segunda Chance (Algoritmo do relógio)
+				-> Lista Circular de páginas
+				-> Se REFERENCE BIT está ligado, zero ele, e tenta a próxima página
+				-> Se desligado, substitui página
+			-> Algoritmos Locais
+				-> Troca de páginas sempre dentro do mesmo processo
+				-> Algoritmo ótimo: manter na memória o conjunto de páginas que será usada 
+					pelas próximas N unidades de tempo
+				-> Modelo de working SET
+					-> Olha para N unidade de tempo passadas
+					-> Muito Custoso; como estimar N?
+			-> Frequência de falta de páginas (FFP)
+				-> Usado apra estimar quando de memória precisa
+				-> Taxa de falta máxima, mínima, e período de contabilidade
+				-> Se > que máxima, aumenta memória
+				-> Se < que mínima, pode diminuir memória
+			-> THRASHING
+				-> Tratamento de falta de página: muito lento
+				-> THRASHING: Congelamento do sistema por troca de págia muito frequente
+				-> Para Resolver: Swapping de 1 ou mais processo
+					
+			
+				
+
+
+
+
+
+
+
