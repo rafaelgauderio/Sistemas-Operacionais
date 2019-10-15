@@ -1,0 +1,30 @@
+5 -a) 
+1-espera ocupada (polling)
+2-interrupções
+3-DNA (acesso direto a memoria)
+
+b) 
+3
+2 avisar p CPU é interromper a CPU
+3
+1
+2 - Várias interrupções ao mesmo tempo, usa esse vetor pra quem tem prioridade
+
+6 - a)
+1- Softaware de E/S do nível do usuário
+2- Softaware do sistema Operacional indepedente do dispositivo
+3- Drivers de dispositivo
+4- Tratadores de interrupção
+
+b -
+3 (fabricante do dispositivo sabe como ele funciona
+1 - printf
+2
+3 - Ele que sabe como o disposito e por dentro
+4 - Para tudo para ver o que aconteceu
+2
+1
+2 - SO tem o controle de qual usuário está usando qual dispositivo
+
+
+  

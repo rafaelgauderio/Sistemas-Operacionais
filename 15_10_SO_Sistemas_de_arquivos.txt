@@ -1,0 +1,59 @@
+	Sistema de arquivos
+
+-> Armazenamento de informações por longo prazo
+	-> 1. Deve ser possível armazenar uma quantidade muito grande de informações
+	-> 2. A Informação deve sobreviver ao término do programa que a usa
+	-> 3. Múltiplos processos tem de ser capazes de acesssar a informação concorrentemente
+
+-> Operações básicas em dispositivo de armazenamento: leitura e escrita
+	-> Inconvenientes
+		-> 1. Como encontrar a informação?
+		-> 2. Como impedir que um usuário tenha acesso a informações de outro usuário?
+		-> 3. Como saber quais blocos são livres?
+	-> Solução: Abstração de arquivos
+-> Arquivos são unidades lógicas de informação criadas por processos
+->Sistemas de arquivos: Modo cmo arquivos são estruturados, nomeados, acessados, usados, protegidos e implementados pelo S.O.
+
+-> Arquivos
+	-> Nomeação de arquivos (slide 2)
+		-> Processo cria arquivo e dá um nome
+		-> 1 a 255 caracteres (números, letras, especiais)
+		-> Pode distinguir maiúsculas/minúsculas (Ex: Linux, DOS)
+		-> Extensão do arquivo
+			-> Indica algo sobre aquivo
+			-> Ex: dos (ext=3), Linux (qualquer tamanho, mais de uma extensão)
+			-> Apenas convenção
+-> Estrutura de arquivos (Slide 3)
+	-> Sequência desestruturada de btes (Ex: Unix, Windows)
+	-> Sequência de Registros
+	-> Árvore (ex. S.O.s de grande porte)
+-> Tipos de arquivos
+	-> arquivos regulares (informação)
+	-> Diretórios (arquivo de sistema que mantém a estrutura di sistema de arquivos)
+	-> Arquivos especiais de caractes (modelam dispositivos de E/S)
+	-> Arquivos especiais de bloco (modelam discos)
+	-> Tipos de arquivos regulares
+		-> Asci
+		-> Binário Ex: Executável Unix (slide )
+	-> Acesso aos arquivos
+		-> Acesso sequencial
+		-> Acesso aleatório (seek/read)
+		-> Atributos de arquivos (Ex: Slide 5)
+			-> Associados a um arquivo, também chamados de metadados
+		-> Operações com arquivos
+			-> Chamadas de sistema (slide 7 e 8)
+			-> Uso em programas (slide 7 e 8)
+-> Diretórios
+	-> Sistemas de diretório em nível único (tudo no diretório-raiz) (slide 9)
+		-> Ex:. Sistemas antigos, sistemas embarcados
+	-> Sistema de diretórios hierárquicos (árvore) (slide 10)
+	-> Nomes de caminhos (slide 11)
+		-> Nome de caminho absoluto (Ex: /USR/AST/CAIXAPOSTAL, \,>)
+			-> Cada processo tem seu diretório de trabalho
+			-> "." e ".." (atual e pai)
+-> Operações com diretórios (slide 12)
+	-> Ligação estrita (hard link)
+	-> Ligação Simbólica (symbolic link)
+-> Link: mesmo arquivo aparecendo em mais de um diretório
+		
+		  
