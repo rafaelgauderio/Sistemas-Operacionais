@@ -1,0 +1,14 @@
+2
+a) Falso - Não permite divisão do arquivo
+
+b) Falso - Essa tabela na memória da um acesso mais rápido ao conteúdo dos arquivos
+
+c) Falso -  Arquivo apagado o usuário não acesso.
+
+d) Verdadeiro.
+
+3 -
+5-7->20->21
+1->2-0->8
+10->3-16->23
+17->19->6-11

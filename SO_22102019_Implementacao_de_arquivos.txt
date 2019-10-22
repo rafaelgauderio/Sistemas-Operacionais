@@ -1,0 +1,45 @@
+-> Implementação do sistemas arquivos
+	-> Esquema do sistema de arquivos (SLIDE 13)
+		-> Superbloco: Identifica tipo do sistema de arquivos, n.º blocos, etc
+		-> Blocos: Livres: mara de bits ou ponteiros
+		-> i-nodes: Info sobre todas os  arquivos
+		-> diretório-raiz: todo da árvore
+		-> demais arquivos e diretórios
+	-> Implementação de arquivos
+		-> Quais blocos estão relacionados a quais arquivos?
+		-> Alocação contígua (slide 14)
+			-> Vantagens: Simples de implementar e desempenho da leitura exedente
+			-> Desvatagem: Não permite divisão do arquivo (arquivos não podem crescer)
+			-> Aplicação: CD-rom, DVD-rom (DVD: 3 Bits tamanho, max: 1GB)
+		-> Alocação por lista encadeada usando um tabela na memória (Slide 16)
+			-> Ex: Fat
+			-> Vantagem: Acesso Aleatório mais fácil
+			-> Desvantagem: Muito uso de memória para armazenar a tabela
+		-> i-indes (slide 17)
+			-> Vantagem: Apenas i-indes dos arquivos abertos precisam estar na memória
+			-> Ex: Unix
+	-> Implementação de diretórios
+		-> Onde colocar atributos? Diretório ou i-node? (slide 18)	
+					Windows x Linux
+		-> Nome de arquivos longos? (slide 19)
+		-> Como tratar diretórios com muitos arquivos?
+			Lento demais para procurar nomes sequencialmente
+				Tabela HASH
+	-> Arquivos Compartilhados (slide 20)
+		-> Árvore - DAG
+		-> Hard Link (slide 21)
+		-> link Simbólico (erro na leitura)
+	-> Sistemas de arquivos Journing
+		-> Ex: NTFS e EXT3
+		-> Problema de parada do sistema
+			-> Ex: 3 Etapas de operação de remoção (slide 22)
+			-> Grava primeiro um log microoperações a serem realizadas
+		-> Um sistema de arquivos com journaling é aquele que mantém um log (journal), normalmente circular, de todas as mudanças no sistema de arquivos antes de escrever os dados no disco. Este tipo de sistema de arquivos oferece uma melhor probabilidade de não sofrer corrupção de dados no caso de o sistema travar ou faltar energia, e uma recuperação mais rápida, porque não há necessidade de verificar todo o disco, somente aqueles que pertenciam a um log que não foi devidamente fechado.
+	
+
+		
+		 					
+		 
+		
+		
+	 
