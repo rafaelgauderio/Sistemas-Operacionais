@@ -1,0 +1,25 @@
+-> Exemplos de sistemas de arquivos
+	-> Cd-Rom
+		-> Iso 9660 (Bloco=2k ou multíplos)
+			->16 Blocos iniciais
+			-> Descritor de volume primário
+			-> Diretórios contém n.º variável de entradas (slide 5)
+				-> Campos binários são escritos 2 vezes (Big Endian e little endian)
+			-> Arquivos em blocos contíguos
+			-> Profundidade de aninhamento: 8
+			-> nível 1: nomes 8+3
+			-> nível 2: 31 caracteres
+		->Extensões rock ridge e Joliet: Eliminam algumas das restriões (slides 36 e 37)
+	-> Fat
+		-> Ainda usado em outros dispositivos
+		-> entrada de diretório (Slide 8) 
+		-> Tabela de alocão
+		-> FAT-12, FAT-16, FAT-32, (28)
+		-> FAT-16: Maior partião = 2 GB
+		-> FAT-32: Partião máxima = 2 TB (slide 39)
+	-> Unix V7
+		-> Entrada no diretório (slide 40)
+		-> N.º máximo de arquivos: 64K
+		-> 10 Endereos no i-node
+		-> Blocos indireto simples, duplos e triplos (slide 41)  		 
+				
