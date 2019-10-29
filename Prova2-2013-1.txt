@@ -1,0 +1,19 @@
+Exercício 2 E
+Errado, um tamanho muito grande ocorre um desperdício de espaço.
+Um tamanho muito grande ocorre uma perde de desempenho.
+
+Exercío 4-
+
+a) 1	111111 111111 10000000 00000000
+   R	  A	B
+b) 1    000001 111111 10000000 00000000  
+
+c)1    000001 111111 111111111 00000000
+
+d) vai ser obrigado a dividir
+1 1111111 11111111 11111111	11100000 
+R   D  	      B         C    	 D 
+
+e)
+1 111111 111111111 10000000	01100000  
+R    D 	     B          C        D
