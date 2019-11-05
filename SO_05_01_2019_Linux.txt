@@ -1,0 +1,127 @@
+baixar distribuições Linux - https://distrowatch.com/	
+
+ESTUDO DE CASO 1: LINUX
+-> Visão geral
+	-> S.O. Múltiplos processos e usuário.
+	-> Projetado por e para programadores.
+	-> Modelo de programadores experientes trabalhando juntos para produzir software avançado.
+	-> Programadores esperam S.O. simples, elegante e consistente; desenpenho e flexibilidade. 
+	-> Aversão a redundâncias inúteis.
+		-> Ex: Grep "ABC" F x executar grep, iterativamente
+	-> Chamadas de sistemas: parâmetros nos registradores e interrupções de sw (trap, fornecer biblioteca em c que chamas elas (slide 3)
+	-> Programas padrão fornecem interface com o usuário.
+	-> Distribuições substituem interface do teclado por interface gráfica
+	-> Interface teclado -> X windows, x11, x, servidor x 		-> gnome, kde
+			(define comunicação, funcionalidades)	 (estende x11, fornece, botões, menus, etc)
+	-> Shell (interpretador de comandos)
+	-> Estrutura de núcleo (slide 6)
+		-> Driver bloco, caracter, rede
+-> Processos no Linux
+	-> Criação de novos processos fork (slide 7)
+		-> código igual ao pai
+			-> Retorna o no filho (pid para o pai)
+		-> comunicação: troca de mês (pipe) ou swais (slide 8)
+		-> chamdas de sistema (slide 9)
+		-> Implementação
+			-> Tarefas (processos e threads	) - task_struct
+		-> Lista duplamente encadeada de tarefas
+		-> parâmetros de escalonamento, imagem da memória, sinais, registradores de máquina, estado da chamadas de sistemas, 
+			tabela de descritor de arquivo, contabilidade, pilha do núcleo, miscelânea
+		-> THREADS: Clone (slide 13)
+-> Escalonamento
+	-> Escalonamento de threads
+	-> 3 Classes:
+		-> 1. FIFO em tempo real (não sofrem preempção)
+		-> 2. Chaveamento circular em tempo real (circular em quantum)
+			prioridade do mais alto 0 (+alto) a 99 (+ baixo)
+		-> 3. Tempo compartilhado - prioridade de 100 a 139
+	-> Quantum: 1 ms (relógio)
+	-> Fila de execução tem 2 vetores: ativo e expirado (slide 15)
+	-> Termina o quantum, vai para expirado
+	     Bloqueia para E/S, volta para ativo
+	-> Quando todas as prioridades vão para expirado, volta tudo para ativo (evita starving)
+	-> Prio 1= 800 ms, prio 139 = 5 ms
+	-> Quando volta do bloqueio, assume processo
+	-> Recebe bônus -5 a +5
+		+1 ou -1 se é premiada ou bloqueada		
+	->  para múltiplas CPU´s:
+		-> Cada CPU tem sua fila de execução
+		-> Tenta manter tarefa na mesma CPU
+		-> Balanceameto periódico de carga
+
+-> Gerenciamento de memória
+	-> 3 Segmentos: código, dados, pilha
+	-> Segmentode dados pode crescer para conter memória alocada dinamicamente
+	-> segmento de código read-only, podem ser compartilhados
+	-> arquivo pode ser mapeada na memória
+	-> Chamadas de sistema: brk, mmap, unmap
+	-> 32 bits: 3 GB p/usuário, 1 GB p/ tabela de páginas e dados do núcleo
+	-> memória principal: 3 partes núcleo e mapa da memória são fixos
+	-> Páginas em 4 níveis (no x86, as 2 do meio possuem 1 entrada)	
+	-> Alocação de memória: algoritmo companheiro (buddy)
+	-> Páginas são carregadas uma a uma, conforme vão sendo usadas
+	-> Substituição de páginas: para-algoritmos de recuperação de molduras de página
+		-> 4 tipos de página: não recuperável, trocável, sincronizável e descartável
+		-> Se memória disponível estiver muito baixa, tenta recuperar 32 páginas (configurável). Vai Buscando nas categorias dentro da categoria, 
+			algoritmo parecido como relógio (slide 22).
+
+-> E/S no linux
+	-> Dispositivos são tratados como arquivos
+	-> Acessdos com chamdas read/write comuns
+	-> Montados no sistema de arquivos, em /dev ex: /dev/hd1, /dev/lp
+	-> cd file /dev/lp
+	-> Bloco x caracteres
+	-> N.º dispositivo pirncipal e secundário
+	-> dev/tty: terminal (teclado+tecla)
+	-> E/S redes: sockets (slide 23)
+		-> 3 tipos de transmissão (slide 24)
+		-> endereço de destino
+	-> Implementação: funções no driver (slide 26)
+	-> Sistemas de E/S (slide 27)
+	-> Módulos carregáveis x estático (drivers, sistemas de arquivos, etc)
+	
+-> Sistema de arquivos
+	-> Nomes com 255 caracteres (Tabela ASCII inteira)
+	-> Diretórios (slide 28)
+	-> Ligação (Slide 29)
+	-> Montagem (slide 30)
+	-> Travamento compartilhado x exclusivo (slide 31)
+	-> Chamadas de sistema (slides 32 a 34)
+	-> Implementação 
+		-> VFS (slide 3)
+		-> EXT2
+			-> Minix: nome=14 caracteres, arquivo=64 MB
+			-> Ext: nomes de até 2, arquivos até 2 GB
+			-> Ext2: melhorias no desempenho
+			-> divide disco em grupos de blocos, sem se preocupar com cilindros (slide 36)
+			-> superbloco: info nº i-nodes, nº blocos, início da lista de blocos livres
+			-> Descritor  de grupo: Localização dos mapas de bits, nº blocos livres, nº diretórios
+			-> Mapa de bits para blocos e i-nodes (cada mapa ocupa 1 bloco)
+				ex: bloco 1 KB, max 8192bloco e i-nodes
+			-> i-nodes numerados de 1 a max (tamanho=128 bytes)
+			-> tenta manter arquivos do mesmo diretório no mesmo grupo de blocos, e dados do arquivo
+				no mesmo bloco do i-node original
+			-> arquivo de diretório (slide 37)
+			-> i-nodes (slide 38)
+			-> Sistema geral (slide 39)
+			-> i-node: 12 enredeços de bloco diretos, 1 indereto simples, 1 duplo, 1 triplo
+				Ex: endereços=32 bits -> bloco 1 kB, max arq=16 GB
+						   -> bloco 8 kb, max arq= 64 TB
+			-> Ext3: Journaling para confiabilidade
+				-> Compatível com ext2, e pode montar etx2 com etx3
+	
+		
+	
+	
+-
+	
+
+			
+
+
+	
+ 
+
+		
+	 
+
