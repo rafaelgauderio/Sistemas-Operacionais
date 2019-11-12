@@ -1,0 +1,85 @@
+ESTUDO DE CASO 2: WINDOWS
+
+-> Api win32 (slide 3)
+-> Tamanho (slide 5)
+-> Camadas windows (slide 6)
+	-> 3 Personalidades: OS/2, POSIX, WIN32
+-> Subsistemas  (slide 7)
+-> Chamadas de sistemas nativas NT (slide 8 e 9)
+-> Manipular (identificados de alguma entidade)
+-> API do win32 (slide 10)
+-> Estrutura do windows (slide 11)
+	-> Hal: abstrai camada de hardware que não possui drivers (slide 12)
+		(Ex 1: tabela de páginas)
+		(Ex 2: E/S mapeada em memória x portas de E/S)
+-> Processos de threads (slide 13)
+	-> tarefa: Agrupa processos para lotes de processamento. Ex: Cotas de usuário (uso raro)
+	-> Filamentos: muitos para muitos com thread
+	-> Threads: unidade de escalonamento
+	-> Chamadas: CreateProcess, CreateThread
+	-> Comunicação: pipes, pipes nomedos, mailslots, sockets ,rpc e arquivos compartilhados
+	-> Sincronização: semáforos, mutexes, regiões críticas e eventos (por threads) (slide 15)
+-> Escalonamento
+	-> Set prioritClast (processo): tempo real, alta, acima, do normal, normal, abaixo do normal, e ociosa
+	-> Set thread priority (prioridade relativa a threads): tempo crítico, mais alta, acima do normal, normal, abaixo do normal, mais baixa, ocioso
+	-> 32 prioridades (slide 18 - prioridade base)
+		-> Prioridade atual pode ser mais alta (mas não mais baixa) que base
+	-> Prioridade 0: zera as páginas de memmória
+	-> Prioridade atual: aumenta SE: (limite 15, tempo real não)
+		-> Retorna de E/S: +1 Disco, +2 Serial, +6 Teclado, +8 placa de som
+		-> Acordada por semáforo: +1 ou +2
+		-> -1 Se usa todo o quantum
+	-> Starving : Para evitar, se thread não executa por muito tempo
+		-> recebe prioridade 15 por 2 quanta
+	-> Quanta: 20 ms cliente, 180 ms Servidor
+	-> Aumenta quantum dos threads da Janela em um primeiro plano
+-> Gerenciamento de memória
+	-> 32 Bits endereço = 4 GB memória virtual
+		-> 2 GB ou 3GB no modo usuário
+	-> Página = 4 KB
+		-> 4 MB em alguns casos ( no núcleo)
+	-> 64 KB das extremidades não usadas (para capturar erros)
+	-> Estado da página de endereçamento virtual: inválida, reservada, comprometida, leitura, escrita, executável
+	-> API: (slide 21)
+		-> Funções para manter páginas na memória (até um limite máximo)
+	-> Implementação (slide 22)
+		-> Páginação sob demanda (sem segmentação)
+		-> Entrada na tabela (slide 23)
+	-> Algoritmo de substituição de páginas (slide 24)
+		-> Conjunto de trablaho de cada processo: min 20 a 50, max 45 a 345 (depende da quantidade de memória)
+	-> Processos podem usar acima do máximo se tiver memória disponível
+	-> Se memória está diminuindo, para de adicionar páginas ao conjunto de trabalho, mas substitui elas no mesmo processo
+	-> Memória baixa: remove páginas mais antigas, diminuindo o conjunto de trabalho
+	-> E/S no windows
+		-> API (slide 25)
+		-> Drivers (WDM)
+			-> Microsoft disponibiliza kit e verificador
+		-> Funções (slide 26)
+		-> Pilhas de dispositivo (slide 27)
+		-> Drivers modo usuário ou modeo núcleo (maiorp caisa de erros de windows)
+		-> Sistema de arquivos NTFS
+			-> Endereço de disco de 6 bits
+			-> Nomes de arquivos: 255 caracteres
+			-> caminhos completos: 32767 caractéres
+			-> unicode
+			-> Implementação
+				-> Tamanho do bloco: 512 bytes a 64 kb-padrão = 4 KB
+				-> MFT: Tabela mestre de arquivos (slide 28)
+					-> Entrada = 1 KB
+					-> Cada entrada descreve um arquivo ou diretório
+					-> Contém lista de endereços do disco do arquivo
+					-> Arquivo muito grandes podem usar mais de uma entrada
+					-> Mapa de bits diz entradas livres
+					-> MFT é um arquivo que pod eficar em qualquer lugar no disco, e crescer em até 2 elevado a (48)
+					-> 16 registros para arquivos de metadados
+					-> Cada registro possui cabeçalho, e uma lista de atributos (slide 28)
+				-> Dados: Blocos são dispostos em séries de blocos consecutivos (slide 30 e 31)
+					-> Fluxo de dadps pode ter espaços vazios
+					-> Um arquivo grande pode precisar de apenas uma entrada na MFT, enquanto um arquivo pequeno fragmentado, de mais de 																		uma entrada.
+					-> Compressão é utilizada, omitindo os zeos dos 64 bits de endereço
+				-> Diretórios (slide 32)
+				-> Compressão: automática de 16 em 16 blocos (slide 33)
+				-> Usa diário (Journaling)
+
+ 		  		   	
+   				
