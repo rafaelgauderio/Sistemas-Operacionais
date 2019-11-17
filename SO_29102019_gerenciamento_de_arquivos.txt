@@ -1,0 +1,32 @@
+GERENCIAMENTO E OTIMIZAÇÃO DOS SISTEMAS DE ARQUIVOS
+
+-> Gerenciamento de espaço em disco
+	-> Tamanho de bloco (slide 23 e 24)
+		-> Unidade de alocação grande: desperdício de espaço;
+		-> Unidade pequena: desperdício de tempo, tabela de alocação ou i-node muito grande
+	-> Monitoramento de Blocos Livres
+		-> Lista encadeada-alternativa: Início e contador
+		-> Mapa de Bits (slide 25)
+	-> Cotas de disco (slide 27)
+		-> Tabela de cotas por usuário
+	-> Copia de segurança do sistema de arquivos (slide 28 a 30)
+		-> Lixeira (não apaga de verdade)
+		-> cópia incremental x cópia física
+	-> consistência de sistemas de arquivos
+		->Queda de energia durante escita de um bloco crítico ou i-node
+		-> Compara lista de blocos livres com blocos utilizados por arquivos (slide 31)
+
+-> Desempenho do sistema de arquivos
+	-> Cache de Blocos
+		-> Algorítmo da memória virtual
+			-> LRU modificado
+				-> Alguns blocos dificilmente são utilizados 2 vezes;
+				->  ALguns blocos são essenciais para consistência
+	-> Leitura antecipada de blocos
+	-> Redução do movimento do braço do disco
+		-> Posição dos i-nodes no disco (slide 34)
+
+-> Desfragmentando discos
+	-> Áreas especiais não podem ser movidas;
+
+CRASH PLAN- LOCAL PARA CONTRATAR PARA FAZER BACKUP NA NUVEM
