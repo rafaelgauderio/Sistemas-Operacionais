@@ -1,0 +1,53 @@
+SEGURANÇA
+->Metas e ameaças (slide 2)
+->Privacidade
+->Insasores passivos x ativos (slide 3)
+-> Perda acidenal de dados (slide 4)
+-> Criptografia (slide 5)
+	-> Chave secrea ou simétrica
+	-> Chave pública ou assimétrica
+-> Mecanismos de proteção
+	-> Listas de controle de acesso (ACL) (Slide 7)
+	-> Sistemas confiáveis (slide 8 e 9)
+-> Autentificação
+	-> Alguma coisa que o usuário sabe
+	-> Alguma coisa que o usuário tem
+	-> Alguma coisa que o usuário usuário é
+	-> autentificação fore: 2 dos acima
+-> Autetificação usando senhas
+	-> Login, senha separadas, ou de uma vez (slide 10)
+	-> Problema: usuários escolhem senhas fracas
+->Ataques de dentro do sistemas
+	-> Bombs lógicas
+	-> Alçapões (slide 16)
+		-> revisões de código
+	-> Logro na autenificação do usuário
+		-> Ctrl + alt+del
+-> Explorando euros de código
+	-> ataque por transbordameno de buffer (slide 19)
+	-> ataques a cadeia de formato	
+	-> Ataque de retorno a LIBC (slide 
+	-> Ataque por transbordamento de números inteiros
+	-> Ataques por injeção do código (slide 21)
+	-> Ataques de esladora de privilégio
+	
+-> Malware
+	-> Cavalos de troia (slide 22)
+	-> vírus (se reproduz anexando seu código a outros programas (slide 23)
+	-> Worms (não precisa de hospedeiro)
+	->  Spyware (slide 24)
+	-> Defesas
+		-> Firewall (slide 26)
+		-> Antivírus (Slide 27)
+		-> Assinaura de código (slide 28)
+		-> Encarceramento (slide 29)
+		
+-> Segugança no linux
+	-> UID (user) -  0 a 65535
+	-> GID (groups) -organizam usuários
+	-> A cada acesso, verifica permissão do UID e GID
+		-> R,W,X
+		-> 3 Bis para cada (slide 48)
+	-> UID= - Super usuário (root) Acesso total
+	-> Chamadas de sistema (slide 41)
+	-> Login: Criptografia senha, compara com arquivo de usuários
