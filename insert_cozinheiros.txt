@@ -1,0 +1,238 @@
+INSERT INTO PROVA_categoria
+(codigo, nome)
+VALUES
+(1, 'mexicanas')
+
+INSERT INTO PROVA_categoria
+(codigo, nome)
+VALUES
+(2, 'brasileiras')
+
+INSERT INTO PROVA_categoria
+(codigo, nome)
+VALUES
+(3, 'italianas')
+
+INSERT INTO PROVA_categoria
+(codigo, nome)
+VALUES
+(4, 'sobremesas')
+
+INSERT INTO PROVA_categoria
+(codigo, nome)
+VALUES
+(5, 'à moda da casa')
+
+INSERT INTO prova_cozinheiro
+(rg,data,salario,nome,nome_fantasia)
+VALUES
+(159632548, TO_DATE ('15/12/2018','DD/MM/YYYY'), 9500.50, 'Rafael', 'Chef_Rafael')
+
+INSERT INTO prova_cozinheiro
+(rg,data,salario,nome,nome_fantasia)
+VALUES
+(299632533, TO_DATE ('14/11/2018','DD/MM/YYYY'), 4500.00, 'Lindaura', 'Chef_Lindaura')
+
+INSERT INTO prova_cozinheiro
+(rg,data,salario,nome,nome_fantasia)
+VALUES
+(352532565, TO_DATE ('15/03/2015','DD/MM/YYYY'), 7500.00, 'Juliana', 'Juliana Mão de Pimenta')
+
+INSERT INTO prova_cozinheiro
+(rg,data,salario,nome,nome_fantasia)
+VALUES
+(549645565, TO_DATE ('08/06/2016','DD/MM/YYYY'), 4200.00, 'Baiano', 'Mestre Baiano')
+
+INSERT INTO prova_cozinheiro
+(rg,data,salario,nome,nome_fantasia)
+VALUES
+(507845598, TO_DATE ('05/06/2017','DD/MM/YYYY'), 15000.00, 'Caio', 'Caio Cozinheiro')
+
+ALTER TABLE prova_restaurantestrabalham 
+RENAME TO prova_restaurantestrabalhados
+
+INSERT INTO PROVA_restaurantestrabalhados
+(codigo, nome)
+VALUES
+(1,'Casa de Massas')
+
+INSERT INTO PROVA_restaurantestrabalhados
+(codigo, nome)
+VALUES
+(2,'El Mexicano')
+
+INSERT INTO PROVA_restaurantestrabalhados
+(codigo, nome)
+VALUES
+(3,'O Brasileirinho')
+
+INSERT INTO PROVA_restaurantestrabalhados
+(codigo, nome)
+VALUES
+(4,'Sorveteria Italiana')
+
+INSERT INTO PROVA_restaurantestrabalhados
+(codigo, nome)
+VALUES
+(5,'La Mamma')
+
+INSERT INTO PROVA_restaurantestrabalhados
+(codigo, nome)
+VALUES
+(6,'Comida Popular')
+
+----
+
+-- PROVA_cozinheiroresttrab
+
+INSERT INTO PROVA_cozinheiroresttrab
+(codigo, rg, codrest)
+VALUES
+(1,549645565,1)
+
+INSERT INTO PROVA_cozinheiroresttrab
+(codigo, rg, codrest)
+VALUES
+(2,299632533,3 )
+
+INSERT INTO PROVA_cozinheiroresttrab
+(codigo, rg, codrest)
+VALUES
+(3,352532565,2)
+
+INSERT INTO PROVA_cozinheiroresttrab
+(codigo, rg, codrest)
+VALUES
+(4,159632548,4)
+
+INSERT INTO PROVA_cozinheiroresttrab
+(codigo, rg, codrest)
+VALUES
+(5,507845598,6)
+
+--PROVA_livro_receita
+
+INSERT INTO PROVA_livro_receita
+(titulo, codreceita)
+VALUES
+('Aprenda a fazer Pizzas',5 )
+
+INSERT INTO PROVA_livro_receita
+(titulo, codreceita)
+VALUES
+('Cozinhe como os Italianos',5)
+
+INSERT INTO PROVA_livro_receita
+(titulo, codreceita)
+VALUES
+('Cozinhe como os Italianos',3)
+
+INSERT INTO PROVA_livro_receita
+(titulo, codreceita)
+VALUES
+('Cozinhe como os Italianos',6)
+
+INSERT INTO PROVA_livro_receita
+(titulo, codreceita)
+VALUES
+('Receitas veganas',5)
+
+INSERT INTO PROVA_livro_receita
+(titulo, codreceita)
+VALUES
+('Comidas Apimentadas',4)
+
+INSERT INTO PROVA_livro_receita
+(titulo, codreceita)
+VALUES
+('Cozinha brasileira',2)
+
+INSERT INTO PROVA_livro_receita
+(titulo, codreceita)
+VALUES
+('Cozinha brasileira',1)
+
+--PROVA_receita_cozinheiro
+
+INSERT INTO PROVA_receita_cozinheiro
+(rg,nomereceita,codreceita )
+VALUES
+(549645565, 'Feijoada com acarajé', 2) -- Mestre Baiano
+
+INSERT INTO PROVA_receita_cozinheiro
+(rg,nomereceita,codreceita )
+VALUES
+(299632533,'Torta de sorvete napolitana',3) --Chef_Lindaura
+
+INSERT INTO PROVA_receita_cozinheiro
+(rg,nomereceita,codreceita )
+VALUES
+(352532565,'Nachos com guisado apimentado',4) --Juliana Mão de Pimenta
+
+INSERT INTO PROVA_receita_cozinheiro
+(rg,nomereceita,codreceita )
+VALUES
+(159632548, 'Pizza Marguerita com uva passa',5) --Chef_Rafael
+
+INSERT INTO PROVA_receita_cozinheiro
+(rg,nomereceita,codreceita )
+VALUES
+(507845598,'Arroz a grega com queijo',1) -- Caio Cozinheiro
+
+INSERT INTO PROVA_receita_cozinheiro
+(rg,nomereceita,codreceita)
+VALUES
+(159632548, 'Risoto com queijo e feijao',6) --Chef_Rafael
+
+-- PROVA_receita_degustador
+
+INSERT INTO PROVA_receita_degustador
+(codreceita,rg,data,nota)
+VALUES
+(2,851258437, TO_DATE('30/11/2010','DD/MM/YYYY'), 8.5 ) -- feijoada
+
+DELETE FROM PROVA_receita_degustador
+WHERE codreceita=2
+
+ALTER TABLE PROVA_receita_degustador
+MODIFY nota NUMBER(3,2)
+
+INSERT INTO PROVA_receita_degustador
+(codreceita,rg,data,nota)
+VALUES
+(2,851258437, TO_DATE('30/11/2010','DD/MM/YYYY'), 8.5 ) -- Feijoada
+
+INSERT INTO PROVA_receita_degustador
+(codreceita,rg,data,nota)
+VALUES
+(3,454551820, TO_DATE('20/09/2016','DD/MM/YYYY'), 9.0 ) -- Torta de sorvete
+
+INSERT INTO PROVA_receita_degustador
+(codreceita,rg,data,nota)
+VALUES
+(4,374551529, TO_DATE('20/10/2013','DD/MM/YYYY'), 9.6 ) -- Nachos com queijo
+
+INSERT INTO PROVA_receita_degustador
+(codreceita,rg,data,nota)
+VALUES
+(5,744558412, TO_DATE('05/01/2008','DD/MM/YYYY'), 7.5 ) -- Pizza marguerita
+
+INSERT INTO PROVA_receita_degustador
+(codreceita,rg,data,nota)
+VALUES
+(1,159658478, TO_DATE('10/12/2006','DD/MM/YYYY'), 8.3 ) -- Arroz à grega
+
+INSERT INTO PROVA_receita_degustador
+(codreceita,rg,data,nota)
+VALUES
+(6,744558412, TO_DATE('05/09/2016','DD/MM/YYYY'), 7.5 ) -- Risoto de queijo
+
+--PROVA_receita_ingrediente
+
+ALTER TABLE PROVA_receita_ingrediente
+MODIFY medida VARCHAR2(30)
+
+INSERT INTO PROVA_receita_ingrediente
+(codreceita,codingrediente,quantidade,medida)
+VALUES
+(6,8,100,'gramas')
